@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-sm-12" ng-show="!genByCart">
+        <h1>Genera file tramite copia & incolla</h1>
+    </div>
+    <div class="col-sm-12" ng-show="genByCart">
+        <h1>Genera file tramite il carrello</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" ng-show="!genByCart">
+        <h3>Copia e incolla il codice da cui generare il file</h3>
+        <textarea id="codeEditor" rows="25" ng-model="copiedText" class="form-control static-size dashed" placeholder="Copia qui il testo da cui generare il file"></textarea>
+    </div>
+    <div class="col-sm-12" ng-show="genByCart">
+        <h3>Test di carrelli</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary pull-right pull-right-margin" id="info-trigger" data-toggle="modal" data-target="#infoModal" ng-disabled="!copiedText"><i class="fa fa-download"></i> &nbsp;Genera file</button>
+    </div>
+</div>
+<!--Modal-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModallLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" ng-form="infoForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="infoModalLabel">Compila le informazioni richieste</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>DbVersion</label>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="autore" name="author" ng-model="info.author">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="newVer" name="newVer" ng-model="info.newVer">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="minVer" name="minVer" ng-model="info.minVer">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="subVer" name="subVer" ng-model="info.subVer">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="reqVer" name="reqVer" ng-model="info.reqVer">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>&nbsp;</label>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea rows="6" class="form-control static-size" placeholder="Descrizione" name="descr" ng-model="info.descr"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-sm-offset-6 text-left" ng-click="info.transazionale=!info.transazionale" style="cursor:pointer;">Script transazionale &nbsp;	<span ng-show="info.transazionale"><i class="fa fa-toggle-on fa-lg"></i></span>
+                            <span ng-show="!info.transazionale"><i class="fa fa-toggle-off fa-lg"></i></span>
+
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label>SetupID</label>
+                            <input type="text" class="form-control" placeholder="req" name="req" ng-model="info.req">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>&nbsp;</label>
+                            <input type="text" class="form-control" placeholder="exc" name="exc" ng-model="info.exc">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label>CustomerVersion</label>
+                            <input type="text" class="form-control" placeholder="Title" name="title" ng-model="info.title">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>&nbsp;</label>
+                            <input type="text" class="form-control" placeholder="SecurityFunction" name="security" ng-model="info.security">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Body" name="body" ng-model="info.body">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label>MappedApplications</label>
+                            <input type="text" class="form-control" placeholder="AssemblyVersion" name="assemblyVersion" ng-model="info.assemblyVersion">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>&nbsp;</label>
+                            <input type="text" class="form-control" placeholder="AssemblyName" name="assemblyName" ng-model="info.assemblyName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="FileVersion" name="fileVersion" ng-model="info.fileVersion">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="PreviousVersionAllowed" name="prevVersion" ng-model="info.prevVersion">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-default" ng-click="resetForm()">Resetta i campi</button>
+                <button type="button" class="btn btn-success" ng-click="genFile()" ng-disabled="infoForm.$invalid"><i class="fa fa-download"></i> &nbsp;Scarica file</button>
+            </div>
+        </div>
+    </div>
+</div>

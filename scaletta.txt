@@ -1,0 +1,57 @@
+//leggenda
+
+- task (ore totali)
+    - sub task (ore)
+    
+//
+
+
+- Impostazione struttura per il progetto su VS (2,5)
+    - importazione file e NuGet di base (0,5)
+    - impostazione struttura per inserimento file spcifici (0,5)
+    - importazione file specifici per il progetto (1)
+    - verifica di corretta importazione (0,5)
+
+- Feature Login (3)
+    - Analisi Feature (0,5)
+    - Implementazione Layout (1)
+    - Implementazione Codice js (1)
+    - Test Feature (0,5)
+
+- Feature Lista Pacchetti (4,5)
+    - Analisi Feature (0,5)
+    - Sviluppo layout (1,5)
+    - Sviluppo controller Front End (2)
+    - Test (0,5)
+
+- Feature Genera Pacchetto (6)
+    - Analisi Feature (0,5)
+    - Sviluppo pagina html (2)
+    - Sviluppo codice js (2,5)
+    - Test (1)
+
+- Feature Ricerca Oggetti (8)
+    - Analisi Feature (1)
+    - Sviluppo pagina html (2)
+    - Sviluppo codice js (4)
+    - Test (1)
+
+- Feature Genera Pacchetto tramite Copia & Incolla (5)
+    - Analisi Feature (0,5)
+    - Sviluppo pagina html (2)
+    - Sviluppo codice js (2)
+    - Test (0,5)
+
+- Sviluppo ed impostazione elementi di supporto (10,5)
+    - Sviluppo tabella con impaginazione e ricerca (3)
+    - Sviluppo stile globale dell'applicazione (4)
+    - Sviluppo campo editabile (1,5) 
+    - Test delle feature in elenco (2)
+    
+- Analisi globale dell'applicativo (5)
+
+
+TOTALE PREVISTO :  39,5 ore circa
+
+    
+

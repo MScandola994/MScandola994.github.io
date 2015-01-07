@@ -1,0 +1,23 @@
+<div class="aside upper" tabindex="-1" role="dialog">
+	<div class="aside-dialog">
+		<div class="aside-content">
+			<div class="aside-header aside-header-inverse">
+				<button type="button" class="close" ng-click="$hide()"><i class="fa fa-close"></i></button>
+				<h4 class="aside-title">Menu</h4>
+			</div>
+			<div class="aside-body menu-list" ng-click="$hide()">
+				<!--<a ui-sref="home" class="menu-item">Home</a>
+				<a ui-sref="contattiElenco" class="menu-item">Contatti</a>
+				<a ui-sref="calendario" class="menu-item">Calendario</a>-->
+                <a ui-sref="scriptUp" class="menu-item"><i class="fa fa-search fa-lg fa-fw"></i>&nbsp; Ricerca</a>
+				<a ui-sref="genPack.cart" class="menu-item"><i class="fa fa-shopping-cart fa-lg fa-fw"></i>&nbsp; Carrello</a>
+                <a ui-sref="genPack.copy" class="menu-item"><i class="fa fa-file-text fa-lg fa-fw"></i>&nbsp; Genera codice da testo</a>
+				<a ui-sref="listaPacchetti" class="menu-item"><i class="fa fa-list-ul fa-lg fa-fw"></i>&nbsp; Lista Pacchetti</a>
+                <a class="menu-item" ng-click="logout()"><i class="fa fa-power-off fa-lg fa-fw"></i>&nbsp; Esci</a>
+                <a class="menu-item" ui-sref="rndImg">Random images</a>
+			</div>
+			<div class="aside-footer">
+			</div>
+		</div>
+	</div>
+</div>

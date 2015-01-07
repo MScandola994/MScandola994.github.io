@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Ricerca</h1>
+    </div>
+    <div class="col-sm-6">
+        <a role="button" class="btn btn-default btn-lg pull-right no-hover" ui-sref="genPack.cart"><i class="fa fa-shopping-cart fa-fw fa-lg"></i> &nbsp;{{carrello.length}}</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-sm-1">Istanza</label>
+                <div class="col-sm-5">
+                    <select class="form-control" ng-model="search.istanza" ng-options="i for i in istanze" ng-change="resetSearch(true)">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <label class="control-label col-sm-1">Database</label>
+                <div class="col-sm-5">
+                    <select class="form-control" ng-model="search.db" ng-options="d for d in db" ng-disabled="!search.istanza">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div ng-show="showFilter">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">Autore</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" ng-model="search.autore" ng-options="a for a in autori" ng-disabled="!search.istanza || !search.db">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1">Periodo</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" ng-model="search.periodo" ng-options="p.label for p in periodi" ng-disabled="!search.istanza || !search.db">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="Inserisci una stringa da ricercare" ng-model="search.filter" ng-disabled="!search.istanza || !search.db">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1">Scriptato ?</label>
+                    <div class="col-sm-5">
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" ng-model="search.scripted" value='true' ng-disabled="!search.istanza || !search.db">Si
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" ng-model="search.scripted" value='false' ng-disabled="!search.istanza || !search.db">No
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" ng-model="search.scripted" value='' ng-disabled="!search.istanza || !search.db">Tutti
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary pull-right" ng-click="startSearch()" ng-disabled="!search.istanza || !search.db"><i class="fa fa-search"></i> &nbsp;Avvia Ricerca</button>
+        <button class="btn btn-default pull-right" style="margin-right:15px" ng-click="toggleFilter()"><i class="fa fa-filter"></i> &nbsp; <span ng-show="!showFilter">Aggiungi Filtri</span><span ng-show="showFilter">Rimuovi Filtri</span></button>
+    </div>
+</div>
+<!--table-->
+<div class="table-responsive" ng-show="isTableRendered">
+    <h3>Risultati Ottenuti : {{elencoScript.length}}</h3>
+    <input type="text" class="form-control" placeholder="Filtra tra i risultati" ng-model="tableSearch" ng-show="elencoScript.length>0">
+    <table class="table table-hover table-condensed" ng-show="elencoScript.length>0">
+        <thead>
+            <th><i class="fa fa-shopping-cart fa-fw fa-lg"></i>
+            </th>
+            <th ng-repeat="l in tableConfig.labels">{{l}}</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="es in pagination.page" ng-click="cart(es)" ng-class="{'success':es.inCart}">
+                <td><span ng-show="es.inCart" class="text-success"><i class="fa fa-check fa-fw fa-lg"></i></span><span ng-show="!es.inCart"><i class="fa fa-circle-o fa-fw fa-lg"></i></span>
+                </td>
+                <td>{{es.id}}</td>
+                <td>{{es.nome}}</td>
+                <td>{{es.tipo}}</td>
+                <td>{{es.autore}}</td>
+                <td>{{es.dataInserimento | date:"dd/MM/yyyy"}}</td>
+                <td>{{es.schema}}</td>
+                <td>{{es.scripted | bool:'Si':'No'}}</td>
+                <td ng-click="openModale($event,es)"><a style="cursor:pointer;"><i class="fa fa-eye"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <nav>
+        <ul class="pagination">
+            <li ng-click="genPage(pagination.current-1)"><a>&laquo;</a>
+            </li>
+            <li ng-repeat="p in pagination.pages" ng-click="genPage(p.value)" ng-class="{'active':p.value == pagination.current}" ng-hide="p.value<$scope.pagination.min || p.value>$scope.pagination.max"><a>{{p.label}}</a>
+            </li>
+            <li ng-click="genPage(pagination.current+1)"><a>&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Button trigger modal -->
+<button id="modal-trigger" type="button" class="btn btn-primary" data-toggle="modal" data-target="#codeModal" style="display:none;">
+    Launch modal
+</button>
+<!--Modal-->
+<div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="codeModalLabel">{{modalParams.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <pre><code class="sql" ng-bind-html="modalParams.body"></code></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
