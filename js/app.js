@@ -43,7 +43,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     //start-up progetto scriptUp
     
     //login
-    .state('login', {
+    /*.state('login', {
         url: '/login',
         templateUrl: 'html/partials/login.html',
         controller: 'loginController'
@@ -78,7 +78,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/lista-pacchetti',
         templateUrl: 'html/partials/listaPacchetti.html',
         controller: 'listaPacchettiController'
-    });
+    });*/
 
 
 });
