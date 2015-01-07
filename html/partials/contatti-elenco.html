@@ -1,0 +1,31 @@
+    <script type="text/javascript" src="https://cdn.rawgit.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js"></script>
+
+<h1>Elenco dei contatti</h1>
+<br>
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-search"></i></span>
+	<input type="text" class="form-control" placeholder="Search in contacts (at least 3 characters)" ng-model="filterContatti" ng-minlength="3">
+</div>
+<br>
+<div class="table-responsive">
+	<table class="table table-hover table-condensed">
+		<thead style="cursor:pointer;">
+			<th></th>
+			<th ng-repeat="colName in colConfigElenco" ng-class="{'hidden-xs':colName=='registered' || colName=='category'|| colName=='email'}" ng-click="sortCol(colName)">{{colName}}
+				<i ng-show="colName != columnName || (colName == columnName && !reverseOrder)" class="fa fa-long-arrow-up"></i>
+				<i ng-show="colName == columnName && reverseOrder" class="fa fa-long-arrow-down"></i>
+			</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="contatto in elencoContatti | filter:filterContatti | orderBy:columnName:reverseOrder">
+				<td><a ui-sref="contattiDettaglio({idContatto:contatto._id})"><i class="fa fa-eye"></i></a>
+				</td>
+				<td ng-repeat="prop in colConfigElenco" ng-class="{'hidden-xs':prop=='registered' || prop=='category'|| prop=='email'}">
+					<span ng-show="prop!='registered'">{{contatto[prop]}}</span>
+					<span ng-show="prop=='registered'">{{contatto[prop]  | date:'dd/MM/yyyy'}}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div style="width:100%;background-color:blue;height:40px;"></div>
